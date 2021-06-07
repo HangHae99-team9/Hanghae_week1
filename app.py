@@ -26,6 +26,10 @@ import hashlib
 ##  HTML을 주는 부분             ##
 #################################
 @app.route('/')
+def main():
+    msg = request.args.get("msg")
+    return render_template('main.html', msg=msg)
+
 # def home():
 #     token_receive = request.cookies.get('mytoken')
 #     try:
