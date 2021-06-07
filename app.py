@@ -29,6 +29,7 @@ import hashlib
 def main():
     msg = request.args.get("msg")
     return render_template('main.html', msg=msg)
+
 # def home():
 #     token_receive = request.cookies.get('mytoken')
 #     try:
