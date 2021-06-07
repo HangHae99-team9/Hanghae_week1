@@ -26,16 +26,16 @@ import hashlib
 ##  HTML을 주는 부분             ##
 #################################
 @app.route('/')
-def home():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"id": payload['id']})
-        return render_template('index.html', nickname=user_info["nick"])
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+# def home():
+#     token_receive = request.cookies.get('mytoken')
+#     try:
+#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+#         user_info = db.user.find_one({"id": payload['id']})
+#         return render_template('index.html', nickname=user_info["nick"])
+#     except jwt.ExpiredSignatureError:
+#         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+#     except jwt.exceptions.DecodeError:
+#         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
 @app.route('/login')
@@ -43,11 +43,9 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
-
 @app.route('/register')
 def register():
     return render_template('register.html')
-
 
 #################################
 ##  로그인을 위한 API            ##
@@ -60,7 +58,7 @@ def register():
 def api_register():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
-    nickname_receive = request.form['nickname_give']
+    # nickname_receive = request.form['nickname_give']
 
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
 
@@ -90,7 +88,7 @@ def api_login():
         # exp에는 만료시간을 넣어줍니다. 만료시간이 지나면, 시크릿키로 토큰을 풀 때 만료되었다고 에러가 납니다.
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=5)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
 
@@ -121,7 +119,7 @@ def api_valid():
         # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
         # 여기에선 그 예로 닉네임을 보내주겠습니다.
         userinfo = db.user.find_one({'id': payload['id']}, {'_id': 0})
-        return jsonify({'result': 'success', 'nickname': userinfo['nick']})
+        return jsonify({'result': 'success', 'id': userinfo['id']})
     except jwt.ExpiredSignatureError:
         # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
