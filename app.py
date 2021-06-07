@@ -3,6 +3,7 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 app = Flask(__name__)
 
 from pymongo import MongoClient
+
 # ,username="test", password="test" 이코드 일단안넣음
 client = MongoClient('mongodb://localhost', 27017)
 db = client.dbsparta_plus_week4
@@ -29,6 +30,8 @@ import hashlib
 def main():
     msg = request.args.get("msg")
     return render_template('main.html', msg=msg)
+
+
 # def home():
 #     token_receive = request.cookies.get('mytoken')
 #     try:
@@ -46,9 +49,17 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
+
+@app.route('/join')
+def join():
+    msg = request.args.get("msg")
+    return render_template('join.html')
+
+
 @app.route('/register')
 def register():
     return render_template('register.html')
+
 
 #################################
 ##  로그인을 위한 API            ##

@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mainStyle.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='javascript/login.js') }}">
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -27,7 +27,7 @@
                     <span class="header-logo">항해오피스</span>
                 </a>
             </h1>
-            <button type="button" class="btn btn-primary btn-lg">회원가입</button>
+            <button type="button" class="btn btn-primary btn-lg">로그인</button>
     </header>
     <form id="login-page">
         <div id="login-page-wrap">
@@ -36,11 +36,14 @@
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter ID">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="InputPassword">Password</label>
+            <input type="password" class="form-control" id="InputPassword" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label for="InputPassword2">Password</label>
+            <input type="password" class="form-control" id="Inputpassword2" placeholder="Password">
           </div>
             <button type="submit" class="btn btn-primary">로그인</button>
-            <button type="button" onclick="window.location.href='/join'" class="btn btn-primary">회원가입</button>
         </div>
     </form>
 </body>
