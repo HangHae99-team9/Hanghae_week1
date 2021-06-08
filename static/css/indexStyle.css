@@ -1,0 +1,36 @@
+* {
+  font-family: 'Jua', sans-serif;
+}
+
+.wrap {
+  width: 900px;
+  margin: auto;
+}
+
+.navbar {
+  width: 900px;
+}
+
+.main-home {
+  margin-top: 1px;
+  display: flex;
+}
+
+.main-home-left {
+  flex-basis: 50%;
+}
+
+.main-home-right1 {
+  margin-top: 10px;
+  flex-basis: 25%;
+}
+
+.main-img {
+  width: 100%;
+  border: none;
+  height: 350px;
+}
+
+.r2-h3 {
+  opacity: 0;
+}
