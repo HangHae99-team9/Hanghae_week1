@@ -6,7 +6,7 @@ from pymongo import MongoClient
 
 # ,username="test", password="test" 이코드 일단안넣음
 client = MongoClient('mongodb://localhost', 27017)
-db = client.dbsparta_plus_week4
+db = client.team9TestOne
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
 # 이 문자열은 서버만 알고있기 때문에, 내 서버에서만 토큰을 인코딩(=만들기)/디코딩(=풀기) 할 수 있습니다.
@@ -24,6 +24,13 @@ import hashlib
 
 import requests
 
+
+# 메소드 부분
+def nowTime():
+    now_time = datetime.datetime.now()
+    now_time = str(now_time)
+    return now_time[:16]
+
 #################################
 ##  HTML을 주는 부분             ##
 #################################
@@ -34,6 +41,41 @@ def main():
     response = r.json()
     weeklys = response['boxOfficeResult']['weeklyBoxOfficeList']
     return render_template("main.html" , weeklys=weeklys,msg=msg)
+
+# 메인페이지 켰을때 GET요청하는거 완성
+@app.route('/', methods=['GET'] )
+def main_get_movies():
+    movie_list = list(db.movies.find({}, {'_id': False}))
+    print(movie_list)
+    return jsonify({'result': movie_list})
+
+
+#  - 리뷰페이지 코드들 -
+@app.route('/review', methods=['GET'])
+def review_get_movie():
+    title_receive = request.args.get('title_give')
+    # 영화 하나의 데이터만 가져와야해서 find_one
+    movie = db.movies.find_one({'title': title_receive})
+    return jsonify({'result': movie})
+
+# 다른사람들이 남기 후기 리스트
+@app.route('/review', methods=['GET'])
+def people_get_review():
+    title_receive = request.args.get('title_give')
+#     다른사람들이 남기 후기 DB에서 가져오기
+    commentList = db.comment
+
+
+@app.route('/review', methods=['POST'])
+def review_save():
+    title_receive = request.args.get('title_give')
+    date = nowTime()
+    point_receive = request.args.get('point_give')
+    comment_receive = request.args.get('comment_give')
+    # id_receive = request.args.get('id_give') ID payload해서 디코드 하는코드넣기
+
+    doc = {'id': id_receive, 'title': title_receive, 'date': date, 'point': point_receive, 'comment': comment_receive, 'like': 0}
+    db.comment.insert_one(doc)
 
 
 
@@ -59,7 +101,6 @@ def login():
 def join():
     msg = request.args.get("msg")
     return render_template('join.html')
-
 
 @app.route('/review')
 def register():
@@ -174,3 +215,4 @@ def main_movie_target():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
+

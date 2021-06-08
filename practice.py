@@ -1,8 +1,9 @@
-list1 = [[1,2], [3,4]]
 
-a = list1[0]
-first = a[0]
-second = a[1]
+from pymongo import MongoClient
 
-list1[0] = first + second
-print(list1)
+# 시간가져오기 코드
+import datetime
+
+now_time = datetime.datetime.now()
+now_time = str(now_time)
+print(now_time[:16])
