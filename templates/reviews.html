@@ -9,7 +9,8 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mainStyle.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='javascript/mainJS.js') }}">
+
+<!--    <script src="/static/js/reviews.js"></script>-->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -21,31 +22,34 @@
             crossorigin="anonymous"></script>
     <title>항해오피스</title>
 
+
 </head>
 <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-            </a>
+    <div class="navbar-brand">
+        <a class="navbar-item Logo" href="/">
+            HangHae Office
+        </a>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-primary" onclick="window.location.href='/login'">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="navbar-end">
+        <div class="navbar-item">
+            <div class="buttons">
+
+                <a class="button is-info" onclick="window.location.href='/login'">
+
                         <strong>Sign up/Sign in</strong>
                     </a>
-                </div>
             </div>
         </div>
-        </div>
-    </nav>
+    </div>
+    </div>
+</nav>
     <article id="movie-information" class="media">
       <figure class="media-left">
         <p class="image is-256x256">
@@ -68,40 +72,44 @@
     <form id="post-review">
       <h3>영화 제목 {{ title }}</h3>
       <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">영화 한줄평</label>
+        <label for="inputReview" class="col-sm-2 col-form-label">영화 한줄평</label>
         <div class="col-sm-10">
-          <input type="password" class="form-control" id="inputPassword3" placeholder="후기를 작성해주세요">
+          <input type="input" class="form-control" id="inputReview" placeholder="후기를 작성해주세요">
         </div>
       </div>
       <fieldset class="form-group">
-        <div class="row">
-          <legend class="col-form-label col-sm-2 pt-0">평점</legend>
-          <div class="col-sm-10">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-              <label class="form-check-label" for="gridRadios1">
-                평점 체크
-              </label>
-            </div>
-          </div>
+          <div>
+              <h3 class="review-point">평점</h3>
+        <div class="starRev">
+          <span class="starR on">별1</span>
+          <span class="starR">별2</span>
+          <span class="starR">별3</span>
+          <span class="starR">별4</span>
+          <span class="starR">별5</span>
+          <span class="starR">별6</span>
+          <span class="starR">별7</span>
+          <span class="starR">별8</span>
+          <span class="starR">별9</span>
+          <span class="starR">별10</span>
         </div>
-          <button class="button is-success enroll-btn">등록</button>
+              </div>
+          <button onclick="postReviews()" class="button is-success enroll-btn">등록</button>
       </fieldset>
 
     </form>
         <article class="media review-board">
           <figure class="media-left">
             <p class="image is-64x64">
-              <img src="{{ img_url}}">
+              <img src="{{ img_url }}">
             </p>
           </figure>
           <div class="media-content">
             <div class="content">
               <p>
-                  <strong>제목{{ title }}</strong> <small>날짜</small> <small>평점{{ point }}</small>
+                  <strong>제목{{ title }}</strong> <small>날짜{{ date }}</small> <small>평점{{ point }}</small>
                   <button type="button" class="delete is-medium delete-button"></button>
                 <br>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
+                    리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
                 <br>
                 <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
               </p>
@@ -109,62 +117,7 @@
 
           </div>
         </article>
-        <article class="media review-board">
-          <figure class="media-left">
-            <p class="image is-64x64">
-              <img src="https://bulma.io/images/placeholders/128x128.png">
-            </p>
-          </figure>
-          <div class="media-content">
-            <div class="content">
-              <p>
-                <strong>Barbara Middleton</strong>
-                <br>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
-                <br>
-                <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-              </p>
-            </div>
 
-          </div>
-        </article>
-        <article class="media review-board">
-          <figure class="media-left">
-            <p class="image is-64x64">
-              <img src="https://bulma.io/images/placeholders/128x128.png">
-            </p>
-          </figure>
-          <div class="media-content">
-            <div class="content">
-              <p>
-                <strong>Barbara Middleton</strong>
-                <br>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
-                <br>
-                <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-              </p>
-            </div>
-
-          </div>
-        </article>
-        <article class="media review-board">
-          <figure class="media-left">
-            <p class="image is-64x64">
-              <img src="https://bulma.io/images/placeholders/128x128.png">
-            </p>
-          </figure>
-          <div class="media-content">
-            <div class="content">
-              <p>
-                <strong>Barbara Middleton</strong>
-                <br>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
-                <br>
-                <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-              </p>
-            </div>
-
-          </div>
-        </article>
 </body>
+
 </html>

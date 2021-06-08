@@ -59,22 +59,24 @@ def review_get_movie():
     return jsonify({'result': movie})
 
 # 다른사람들이 남기 후기 리스트
-@app.route('/review', methods=['GET'])
-def people_get_review():
-    title_receive = request.args.get('title_give')
-#     다른사람들이 남기 후기 DB에서 가져오기
-    commentList = db.comment
+@app.route('/reviews/<title>', methods=['GET'])
+def people_get_review(title):
+#     title_receive = request.args.get('title_give')
+# #     다른사람들이 남기 후기 DB에서 가져오기
+#     commentList = db.comment
+    render_template("reviews.html", reviews=title)
 
 
-@app.route('/review', methods=['POST'])
+@app.route('/reviews', methods=['POST'])
 def review_save():
     title_receive = request.args.get('title_give')
     date = nowTime()
     point_receive = request.args.get('point_give')
-    comment_receive = request.args.get('comment_give')
+    reviews_receive = request.args.get('reviews_give')
+
     # id_receive = request.args.get('id_give') ID payload해서 디코드 하는코드넣기
 
-    doc = {'id': id_receive, 'title': title_receive, 'date': date, 'point': point_receive, 'comment': comment_receive, 'like': 0}
+    doc = {'title': title_receive, 'date': date, 'point': point_receive, 'reviews': reviews_receive, 'like': 0}
     db.comment.insert_one(doc)
 
 
@@ -250,7 +252,7 @@ def sign_in():
     if result is not None:
         payload = {
          'id': username_receive,
-         'exp': datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
+         'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
 

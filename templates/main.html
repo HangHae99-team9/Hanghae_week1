@@ -12,38 +12,39 @@
         integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/indexStyle.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 </head>
 <body>
-<div class="wrap">
   <!--          navbar-->
-  <nav class="navbar is-transparent is-fixed-top">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" onclick="window.location.href = '/'">
-        항해 오피스
-      </a>
+        <a class="navbar-item Logo" href="/">
+            HangHae Office
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
     </div>
-    <div class="navbar-menu" id="navbarExampleTransparentExample">
-      <div class="navbar-end">
+    <div class="navbar-end">
         <div class="navbar-item">
-          <div class="field is-grouped">
-            <p class="control">
-              <a class="button is-primary"
-                 onclick="window.location.href = '/login'">
-                        <span class="icon">
-                          <i class="fas fa-sign-in-alt"></i>
-                        </span>
-                <span>로그인</span>
-              </a>
-            </p>
-          </div>
+            <div class="buttons">
+
+                <a class="button login-button" onclick="window.location.href='/login'">
+
+                        <strong>Sign up/Sign in</strong>
+                    </a>
+            </div>
         </div>
-      </div>
     </div>
-  </nav>
+
+</nav>
   <!--          main center-->
   <section class="main-home">
     <div class="main-home-left">

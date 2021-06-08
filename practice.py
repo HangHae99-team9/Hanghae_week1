@@ -1,4 +1,3 @@
-
 from pymongo import MongoClient
 
 # 시간가져오기 코드
@@ -9,5 +8,5 @@ import datetime
 # print(now_time[:16])
 
 
-ut = datetime.utcnow()
+ut = datetime.datetime.utcnow()
 print(ut)
