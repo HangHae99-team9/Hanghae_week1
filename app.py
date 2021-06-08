@@ -104,9 +104,9 @@ def join():
     msg = request.args.get("msg")
     return render_template('join.html')
 
-@app.route('/review')
+@app.route('/reviews')
 def register():
-    return render_template('review.html')
+    return render_template('reviews.html')
 
 
 #################################
