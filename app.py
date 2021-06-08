@@ -41,13 +41,6 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
-
-@app.route('/join')
-def join():
-    msg = request.args.get("msg")
-    return render_template('join.html')
-
-
 @app.route('/register')
 def register():
     return render_template('register.html')
