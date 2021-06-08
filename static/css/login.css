@@ -3,7 +3,18 @@
     left: 0;
     right: 0;
     position: fixed;
-    background-color: bisque;
+    background-color: #73aace;
+    border-bottom-width: 1px;
+    border-bottom-color: #73aace;
+    border-bottom-style: solid;
+}
+.Logo{
+    font-size: 50px;
+    color: white;
+}
+.login-button{
+    background-color: white;
+    color: #73aace;
 }
 
 .section {
@@ -11,14 +22,14 @@
 }
 
 .button.is-sparta {
-    background-color: hsl(171, 100%, 41%);
+    background-color: #73aace;
     border-color: transparent;
     color: white !important;
 }
 
 .button.is-sparta.is-outlined {
     background-color: transparent;
-    border-color: hsl(171, 100%, 41%);
+    border-color: #73aace;
     color: black !important;
 }
 

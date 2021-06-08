@@ -1,4 +1,3 @@
-
 from pymongo import MongoClient
 
 # 시간가져오기 코드

@@ -7,14 +7,14 @@
   margin: auto;
 }
 
-.navbar {
-  width: 900px;
-  background-color: darksalmon;
-}
+/*.navbar {*/
+/*  width: 900px;*/
+/*  background-color: darksalmon;*/
+/*}*/
 
-.navbar.is-fixed-top {
-  position: inherit;
-}
+/*.navbar.is-fixed-top {*/
+/*  position: inherit;*/
+/*}*/
 
 .main-home {
   margin-top: 2px;

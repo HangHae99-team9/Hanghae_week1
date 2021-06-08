@@ -7,6 +7,7 @@ function toggle_sign_up() {
             $("#help-password2").toggleClass("hidden")
 }
 
+
 function is_nickname(asValue) {
     var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
     return regExp.test(asValue);
@@ -139,3 +140,4 @@ function sign_in() {
         }
     });
 }
+
