@@ -35,13 +35,13 @@ def review():
 @app.route('/')
 
 
-@app.route('/index')
+@app.route('/main')
 def index():
     msg = request.args.get("msg")
     r = requests.get('http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f02f0047514de8f2bca5b5c23374ee21&targetDt=20210601')
     response = r.json()
     weeklys = response['boxOfficeResult']['weeklyBoxOfficeList']
-    return render_template("index.html" , weeklys=weeklys ,msg=msg)
+    return render_template("main.html" , weeklys=weeklys ,msg=msg)
 
 @app.route('/login')
 def login():
