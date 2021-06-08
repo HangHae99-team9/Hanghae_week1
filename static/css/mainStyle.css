@@ -11,11 +11,12 @@ body {
     top: 0;
     right: 0;
     left: 0;
+    display: block;
     box-sizing: border-box;
-    background-color: bisque;
+    background-color: #fff;
     position: fixed;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
+    border-color: #fff;
+
 }
 #fixed-bar-logo{
     display: inline-block;
@@ -29,17 +30,17 @@ body {
 }
 .card-img{
     width: 100%;
-    height: 100%;
+    height: 400px;
 }
 .card{
     width: 60%;
-    height: 30%;
+    height: 50%;
     margin-left: 20%;
-    position: absolute;
+    position: relative;
 }
 
 #post-reviews{
-    margin-top: 23%;
+    margin-top: 3%;
     width: 60%;
     margin-left: 20%;
     border-style: solid;
@@ -50,6 +51,11 @@ body {
     border-style: solid;
     border-width: 2px;
     margin-top: 15px;
+    margin-left: 10%;
+    width: 80%;
+}
+.review-title{
+    margin-left: 2%;
 }
 .review-head{
     display: inline-block;
@@ -57,5 +63,8 @@ body {
 }
 .review-btn{
     float: right;
+}
+.review-line{
+    margin-left: 2%;
 }
 
