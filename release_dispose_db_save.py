@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)
-db = client.team9Test
+db = client.team9TestOne
 
 # 여기 테스트
 # 발매일 코드 데이터베이스에 저장하는 코드 따로만들기
@@ -30,8 +30,8 @@ for movie in movie_list:
 
     big_list.append(release_list)
 
-# 데이터베이스에저장 보다는 UPDATE 왜냐면 이코드를 한번에 크롤링해서 처리를 못해서 UPDATE를 한것이다
-movies = list(db.movies.find({},{'_id':False}))
+# 데이터베이스에저장보다는 UPDATE 왜냐면 이코드를 한번에 크롤링해서 처리를 못해서 UPDATE를 한것이다
+movies = list(db.movies.find({}, {'_id': False}))
 
 for idx, movie in enumerate(movies):
     title = movie['title']

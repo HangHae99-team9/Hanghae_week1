@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)
-db = client.team9Test
+db = client.team9TestOne
 
 # 여기 테스트
 # 장르넣는 코드 데이터베이스에 저장하는 코드 따로만들기

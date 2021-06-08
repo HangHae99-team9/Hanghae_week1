@@ -4,10 +4,9 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)
-db = client.team9Test
+db = client.team9TestOne
 
 
-# 이것만 따로 크롤링 코드 AND UPDATE코드
 # 모든 영화 url을 가져온다 -> 그다음 url을 detail url로 변경한다
 # actorlist 저장 코드
 movie_list = list(db.movies.find({}, {'_id': False}))

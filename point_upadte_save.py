@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)
-db = client.team9Test
+db = client.team9TestOne
 
 # 네티즌 포인트로 업데이트할려고 만든코드
 def update_point():
@@ -22,8 +22,9 @@ def update_point():
             point_list.append(point)
 
     # 포인트값만 이제 가져와서 하면된다.
-    movies = list(db.movies.find({},{'_id':False}))
-    for idx,movie in enumerate(movies):
+    movies = list(db.movies.find({}, {'_id': False}))
+    for idx, movie in enumerate(movies):
         title = movie['title']
-        # print(title, point_list[idx])
         db.movies.update_one({'title': title}, {'$set': {'point': point_list[idx]}})
+
+update_point()
