@@ -9,20 +9,27 @@
 
 .navbar {
   width: 900px;
+  background-color: darksalmon;
+}
+
+.navbar.is-fixed-top {
+  position: inherit;
 }
 
 .main-home {
-  margin-top: 1px;
+  margin-top: 2px;
   display: flex;
 }
 
 .main-home-left {
   flex-basis: 50%;
+  padding: 1px;
 }
 
 .main-home-right1 {
   margin-top: 10px;
   flex-basis: 25%;
+  padding: 1px;
 }
 
 .main-img {
@@ -33,4 +40,25 @@
 
 .r2-h3 {
   opacity: 0;
+}
+
+.card-columns .card {
+  margin-bottom: .75rem;
+  cursor: pointer;
+}
+
+@media (min-width: 576px) {
+  .card-columns {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem
+  }
+
+  .card-columns .card {
+    display: inline-block;
+    width: 100%
+  }
 }
