@@ -31,6 +31,7 @@ def main():
     msg = request.args.get("msg")
     return render_template('main.html', msg=msg)
 
+
 @app.route('/index')
 def index():
     msg = request.args.get("msg")
