@@ -97,6 +97,8 @@ def login():
     return render_template('login.html', msg=msg)
 
 
+@app.route('/register')
+
 @app.route('/join')
 def join():
     msg = request.args.get("msg")

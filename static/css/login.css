@@ -1,10 +1,32 @@
-#login-page{
-    width: 50%;
-    position: absolute;
-    top: 20%;
-    left: 25%;
-    border-style: solid;
-    border-width: 2px;
-    padding: 15px;
+.navbar {
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    background-color: bisque;
+}
+
+.section {
+    margin-top: 5%;
+}
+
+.button.is-sparta {
+    background-color: hsl(171, 100%, 41%);
+    border-color: transparent;
+    color: white !important;
+}
+
+.button.is-sparta.is-outlined {
+    background-color: transparent;
+    border-color: hsl(171, 100%, 41%);
+    color: black !important;
+}
+
+.help {
+    color: gray;
+}
+
+.hidden {
+    display: none;
 }
 
