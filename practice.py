@@ -9,5 +9,5 @@ import datetime
 # print(now_time[:16])
 
 
-ut = datetime.utcnow()
+ut = datetime.datetime.utcnow()
 print(ut)
