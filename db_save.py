@@ -6,7 +6,6 @@ from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.team9
 
-
 # DB에 저장할 영화인들의 출처 url을 가져옵니다.
 # 진짜 완료
 def get_urls():
