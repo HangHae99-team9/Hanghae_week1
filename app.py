@@ -32,6 +32,9 @@ def review():
     return render_template('review.html', msg=msg)
 
 @app.route('/')
+
+
+@app.route('/index')
 def index():
     msg = request.args.get("msg")
     return render_template('index.html', msg=msg)
@@ -131,6 +134,32 @@ def api_valid():
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+
+
+# 메인페이지 에서 모든 영화포스터 리스트 보여줄떄 사용
+@app.route('/movies', methods=['GET'])
+def main_movie():
+    movie_list = list(db.movies.find({},{'_id':False}))
+    print(movie_list)
+    return jsonify({'result': movie_list})
+
+# 리뷰페이지
+@app.route('/movies/reviews', methods=['GET'])
+def main_movie_target():
+    title_receive = request.args.get('title_give')  # 어떤 영화를 했는지 알아야하니까 그값을 받아오는거
+
+    # movie_list = list(db.movies.find({'title': title_receive},{'_id':False}))
+
+
+
+#
+# @app.route('/test', methods=['GET'])
+# def test_get():
+#     title_receive = request.args.get('title_give')
+#     print(title_receive)
+#     return jsonify({'result': 'success', 'msg': '이 요청은 GET!'})
+
+
 
 
 if __name__ == '__main__':
