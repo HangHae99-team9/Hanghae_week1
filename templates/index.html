@@ -28,34 +28,34 @@
 
 
   </style>
-  <script>
-      $(document).ready(function () {
-          {#$('#movie-list2').empty()#}
-          //get_list()
-      })
+<!--  <script>-->
+<!--      $(document).ready(function () {-->
+<!--          {#$('#movie-list2').empty()#}-->
+<!--          //get_list()-->
+<!--      })-->
 
-      function get_list() {
-          $.ajax({
-              type: "GET",
-              url: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20210606",
-              data: {},
-              success: function (response) {
-                  let rows = response['boxOfficeResult']['dailyBoxOfficeList'];
-                  for(let i = 0; i < rows.length; i++) {
-                    let movie_name = rows[i]['movieNm']
+<!--      function get_list() {-->
+<!--          $.ajax({-->
+<!--              type: "GET",-->
+<!--              url: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20210606",-->
+<!--              data: {},-->
+<!--              success: function (response) {-->
+<!--                  let rows = response['boxOfficeResult']['dailyBoxOfficeList'];-->
+<!--                  for(let i = 0; i < rows.length; i++) {-->
+<!--                    let movie_name = rows[i]['movieNm']-->
 
-                    let temp_html = `<li class="list-group-item"></li>`
-                    if (i < 5) {
-                      $('#movie-list1').append(temp_html)
-                    } else {
-                      $('#movie-list2').append(temp_html)
-                    }
+<!--                    let temp_html = `<li class="list-group-item"></li>`-->
+<!--                    if (i < 5) {-->
+<!--                      $('#movie-list1').append(temp_html)-->
+<!--                    } else {-->
+<!--                      $('#movie-list2').append(temp_html)-->
+<!--                    }-->
 
-                  }
-              }
-          })
-      }
-  </script>
+<!--                  }-->
+<!--              }-->
+<!--          })-->
+<!--      }-->
+<!--  </script>-->
 </head>
 
 <body>
@@ -82,11 +82,11 @@
       <div class="main-home-right1">
         <h3>박스 오피스</h3>
         <ul class="list-group list-group-flush" id="movie-list1">
-          {% for row in rows %}
-            {% set movie_rank = row['rank'] %}
-            {% set movie_name = row['movieNm'] %}
+          {% for weekly in weeklys %}
+            {% set movie_rank = weekly['rank'] %}
+            {% set movie_name = weekly['movieNm'] %}
             {% if movie_rank|int <= 5 %}
-              <li class="list-group-item">{{ row['movieNm'] }}</li>
+              <li class="list-group-item">{{movie_rank}}.{{ weekly['movieNm'] }}</li>
             {% endif %}
           {% endfor %}
         </ul>
@@ -94,11 +94,11 @@
       <div class="main-home-right1">
         <h3 class="r2-h3">박스 오피스</h3>
         <ul class="list-group list-group-flush" id="movie-list2">
-          {% for row in rows %}
-            {% set movie_rank = row['rank'] %}
-            {% set movie_name = row['movieNm'] %}
+          {% for weekly in weeklys %}
+            {% set movie_rank = weekly['rank'] %}
+            {% set movie_name = weekly['movieNm'] %}
             {% if movie_rank|int > 5 %}
-              <li class="list-group-item">{{ row['movieNm'] }}</li>
+              <li class="list-group-item">{{movie_rank}}.{{ weekly['movieNm'] }}</li>
             {% endif %}
           {% endfor %}
         </ul>
