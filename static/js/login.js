@@ -132,8 +132,8 @@ function sign_in() {
         },
         success: function (response) {
             if (response['result'] == 'success') {
-                $.cookie('mytoken', response['token'], {path: '/'});
-                window.location.replace("/")
+                $.cookie('mytoken', response['token'], {path: '/main'});
+                window.location.replace("/main")
             } else {
                 alert(response['msg'])
             }
