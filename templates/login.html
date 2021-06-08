@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='js/login.js') }}">
+
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='js/login.js') }}">-->
+
 
     <title>로그인페이지</title>
 </head>
@@ -24,7 +28,11 @@
     <div class="navbar-end">
         <div class="navbar-item">
             <div class="buttons">
+
                 <a class="button is-primary" onclick="window.location.href='/login'">
+
+                <a class="button is-primary" onclick="window.location.href='/login_toggle.html'">
+
                     <strong>Sign up/Sign in</strong>
                 </a>
             </div>
