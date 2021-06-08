@@ -26,16 +26,20 @@ import hashlib
 #################################
 ##  HTML을 주는 부분             ##
 #################################
+# @app.route('/')
+# def main():
+#     msg = request.args.get("msg")
+#     return render_template('main.html', msg=msg)
+
+
 @app.route('/')
 def main():
     msg = request.args.get("msg")
     return render_template('main.html', msg=msg)
 
+@app.route('/movies')
+def get_movie():
 
-@app.route('/index')
-def index():
-    msg = request.args.get("msg")
-    return render_template('index.html', msg=msg)
 
 # def home():
 #     token_receive = request.cookies.get('mytoken')
