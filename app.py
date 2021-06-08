@@ -22,23 +22,18 @@ import datetime
 # 그렇지 않으면, 개발자(=나)가 회원들의 비밀번호를 볼 수 있으니까요.^^;
 import hashlib
 
+import requests
 
 #################################
 ##  HTML을 주는 부분             ##
 #################################
-# @app.route('/')
-# def main():
-#     msg = request.args.get("msg")
-#     return render_template('main.html', msg=msg)
-
-
 @app.route('/')
 def main():
     msg = request.args.get("msg")
-    return render_template('main.html', msg=msg)
-
-@app.route('/movies')
-def get_movie():
+    r = requests.get('http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f02f0047514de8f2bca5b5c23374ee21&targetDt=20210601')
+    response = r.json()
+    weeklys = response['boxOfficeResult']['weeklyBoxOfficeList']
+    return render_template("main.html" , weeklys=weeklys, msg=msg)
 
 
 # def home():
@@ -65,9 +60,9 @@ def join():
     return render_template('join.html')
 
 
-@app.route('/register')
-def register():
-    return render_template('register.html')
+@app.route('/review')
+def review():
+    return render_template('review.html')
 
 
 #################################
