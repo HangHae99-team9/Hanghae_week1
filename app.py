@@ -26,12 +26,12 @@ import hashlib
 #################################
 ##  HTML을 주는 부분             ##
 #################################
-@app.route('/')
-def main():
+@app.route('/review')
+def review():
     msg = request.args.get("msg")
-    return render_template('main.html', msg=msg)
+    return render_template('review.html', msg=msg)
 
-@app.route('/index')
+@app.route('/')
 def index():
     msg = request.args.get("msg")
     return render_template('index.html', msg=msg)
