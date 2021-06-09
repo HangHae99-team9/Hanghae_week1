@@ -67,6 +67,15 @@ def main_movie_get():
 def review_page():
     return render_template("reviews.html")
 
+@app.route('/reviews/detail', methods=['GET'])
+def review_get_detail():
+   title_receive = request.args.get('title_give')
+   movie = db.movies.find_one({'title': title_receive}, {'_id':False})
+
+   return jsonify({'result': movie})
+
+
+
 #################################
 ##  로그인을 위한 API            ##
 #################################

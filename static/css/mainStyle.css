@@ -3,38 +3,76 @@
     margin: 0;
     outline: none;
 }
+
 body {
     padding-top: 10%;
 }
-#movie-information{
+
+#movie-information {
     width: 70%;
     margin-left: 20%;
 }
-#post-review{
+
+#movie-information {
     width: 70%;
-    margin-left: 20%;
+    height: 14%;
+    box-sizing: border-box;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #73aace;
+    border-radius: 8px;
 }
-.review-board{
-    width: 70%;
-    margin-left: 20%;
-}
-.enroll-btn{
-    float: right;
-}
-.delete-button{
-    float: right;
-}
-.review-point{
+
+.image_wrap {
     display: inline-block;
 }
-.starR{
-  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-  background-size: auto 100%;
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  text-indent: -9999px;
-  cursor: pointer;
-}
-.starR.on{background-position:0 0;}
 
+.movie-information-wrap {
+    display: inline-block;
+}
+
+.reviews_movie_image {
+    border-radius: 5px;
+}
+
+#post-review {
+    width: 70%;
+    margin-left: 20%;
+    margin-top: 10px;
+    padding-top: 3%;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 8px;
+    border-color: #73aace;
+    padding: 1%;
+}
+.input-review{
+    display: inline-block;
+    width: 70%;
+    margin-left: 5%;
+}
+.review-btn{
+    float: right;
+}
+.review-board {
+    width: 70%;
+    margin-left: 20%;
+}
+
+.enroll-btn {
+    float: right;
+}
+
+.delete-button {
+    float: right;
+}
+
+.review-point {
+    display: inline-block;
+}
+
+.posted-review {
+    border-width: 2px;
+    border-style: solid;
+    border-right: 8px;
+}
