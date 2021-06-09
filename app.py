@@ -117,13 +117,25 @@ def review_get_show():
 # 리뷰 삭제하기
 @app.route('/reviews/delete', methods=['POST'])
 def review_delete():
-    title_receive = request.form['title_give']
-    username_receive = request.form['username_give']
-    time_receive = request.form['time_give']
-    print('삭제요청:', title_receive, username_receive, time_receive)
-    db.reviews.delete_one({'title': title_receive, 'username': username_receive, 'time': time_receive})
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        username_decode = payload['id']
+        title_receive = request.form['title_give']
+        username_receive = request.form['username_give']
+        time_receive = request.form['time_give']
+        if(username_decode != username_receive):
+            return jsonify({'msg': '이 글에대해 삭제 권한이 없습니다.'})
+        print('삭제요청:', title_receive, username_receive, time_receive, '디코드:', username_decode)
+        db.reviews.delete_one({'title': title_receive, 'username': username_receive, 'time': time_receive})
 
-    return jsonify({'msg': '삭제 완료되었습니다.'})
+        return jsonify({'msg': '삭제 완료되었습니다.'})
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+
 
 # 리뷰 좋아요
 @app.route('/reviews/like', methods=['POST'])
