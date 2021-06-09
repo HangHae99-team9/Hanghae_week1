@@ -7,13 +7,19 @@
     border-bottom-width: 1px;
     border-bottom-color: #73aace;
     border-bottom-style: solid;
+    height: 10%;
 }
 .Logo{
-    font-size: 50px;
+    font-size: 100%;
     color: white;
 }
 .login-button{
+    /*width: 100px;*/
     background-color: white;
+    color: white;
+    float: right;
+}
+.Login{
     color: #73aace;
 }
 
