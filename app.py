@@ -63,66 +63,7 @@ def main_movie_get():
     movie_list = list(db.movies.find({}, {'_id': False}))
     return jsonify({'result': movie_list})
 
-
-#  - 리뷰페이지 코드들 -
-@app.route('/review', methods=['GET'])
-def review_get_movie():
-    title_receive = request.args.get('title_give')
-    # 영화 하나의 데이터만 가져와야해서 find_one
-    movie = db.movies.find_one({'title': title_receive})
-    return jsonify({'result': movie})
-
-# 다른사람들이 남기 후기 리스트
-@app.route('/reviews/<title>', methods=['GET'])
-def people_get_review(title):
-#     title_receive = request.args.get('title_give')
-# #     다른사람들이 남기 후기 DB에서 가져오기
-#     commentList = db.comment
-    render_template("reviews.html", reviews=title)
-
-
-@app.route('/reviews', methods=['POST'])
-def review_save():
-    title_receive = request.args.get('title_give')
-    date = nowTime()
-    point_receive = request.args.get('point_give')
-    reviews_receive = request.args.get('reviews_give')
-
-    # id_receive = request.args.get('id_give') ID payload해서 디코드 하는코드넣기
-
-    doc = {'title': title_receive, 'date': date, 'point': point_receive, 'reviews': reviews_receive, 'like': 0}
-    db.comment.insert_one(doc)
-
-
-
-# def home():
-#     token_receive = request.cookies.get('mytoken')
-#     try:
-#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-#         user_info = db.user.find_one({"id": payload['id']})
-#         return render_template('index.html', nickname=user_info["nick"])
-#     except jwt.ExpiredSignatureError:
-#         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-#     except jwt.exceptions.DecodeError:
-#         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-
-
-@app.route('/login')
-def login():
-    msg = request.args.get("msg")
-    return render_template('login.html', msg=msg)
-
-
-@app.route('/register')
-
-@app.route('/join')
-def join():
-    msg = request.args.get("msg")
-    return render_template('join.html')
-
-
 # reviews 페이지
-
 @app.route('/reviews')
 def review_page():
     return render_template("reviews.html")
@@ -171,11 +112,7 @@ def sign_in():
     if result is not None:
         payload = {
          'id': username_receive,
-
-         'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
-
          'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 2)  # 로그인 24시간 유지 60 * 60 * 24
- main
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
 
@@ -184,9 +121,36 @@ def sign_in():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
+# @app.route('/post', methods=['POST'])
+# def posting():
+#     token_receive = request.cookies.get('mytoken')
+#
+#     try:
+#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+#
+#         user_info = db.users.find_one({"username": payload["id"]})
+#         review_receive = `request`.form['review_give']
+#         store = request.form["store"]
+#         now = datetime.now()
+#         time = now.strftime('%Y년 %m월 %d일 %H시 %M분')
+#         if len(review_receive) < 5:
+#             return jsonify({"msg" : "리뷰를 5자이상 달아주세요"})
+#         doc = {
+#             'review': review_receive,
+#             'store': store,
+#             'user': user_info,
+#             'time': time
+#         }
+#         db.reviews.insert_one(doc)
+#         return jsonify({'msg': '리뷰를 저장했습니다.'})
+#
+#     except jwt.ExpiredSignatureError:
+#         return jsonify({'msg': '로그인 시간이 만료됐습니다.'})
+#     except jwt.exceptions.DecodeError:
+#         return jsonify({'msg': "로그인 해주세요"})
+#
 
 
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
-
