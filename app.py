@@ -3,9 +3,10 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 app = Flask(__name__)
 
 from pymongo import MongoClient
-
+# client = MongoClient('mongodb://test:test@3.35.4.232', 27017)
 # ,username="test", password="test" 이코드 일단안넣음
-client = MongoClient('mongodb://localhost', 27017)
+client = MongoClient('mongodb://test:test@localhost', 27017)
+# client = MongoClient('localhost', 27017)
 db = client.team9TestOne
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
@@ -29,7 +30,7 @@ import requests
 def nowTime():
     now_time = datetime.datetime.now()
     now_time = str(now_time)
-    return now_time[:16]
+    return now_time[:19]
 
 
 ##  HTML을 주는 부분             ##
@@ -110,7 +111,7 @@ def review_save():
 @app.route('/reviews/show', methods=['GET'])
 def review_get_show():
     title_receive = request.args.get('movie_title_give')
-    review_list = list(db.reviews.find({'title': title_receive}, {'_id': False}))
+    review_list = list(db.reviews.find({'title': title_receive}, {'_id': False}).sort('like', -1))
     print('리뷰다 보여주기 ',review_list)
     return jsonify({'result': review_list})
 
@@ -123,11 +124,12 @@ def review_delete():
         username_decode = payload['id']
         title_receive = request.form['title_give']
         username_receive = request.form['username_give']
+        comment_receive = request.form['comment_give']
         time_receive = request.form['time_give']
         if(username_decode != username_receive):
             return jsonify({'msg': '이 글에대해 삭제 권한이 없습니다.'})
         print('삭제요청:', title_receive, username_receive, time_receive, '디코드:', username_decode)
-        db.reviews.delete_one({'title': title_receive, 'username': username_receive, 'time': time_receive})
+        db.reviews.delete_one({'title': title_receive, 'username': username_receive, 'time': time_receive, 'review_comment': comment_receive})
 
         return jsonify({'msg': '삭제 완료되었습니다.'})
 
@@ -143,9 +145,9 @@ def review_like():
     title_receive = request.form['title_give']
     username_receive = request.form['username_give']
     time_receive = request.form['time_give']
-
+    comment_receive = request.form['comment_give']
     print('좋아요 코드: ', title_receive, username_receive, time_receive)
-    target_review = db.reviews.find_one({'title': title_receive, 'time':time_receive, 'username': username_receive})
+    target_review = db.reviews.find_one({'title': title_receive, 'time':time_receive, 'username': username_receive, 'review_comment': comment_receive })
     current_like = target_review['like']
 
     new_like = current_like + 1

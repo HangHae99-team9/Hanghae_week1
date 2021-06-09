@@ -84,7 +84,7 @@ function review_show(title) {
     $.ajax({
         type: "GET",
         url: "/reviews/show",
-        data: {movie_title_give: movie_title}, //여기부분은 post할떄 사용
+        data: {movie_title_give: movie_title},
         success: function (response) {
             let reviews = response['result'];
 
@@ -106,8 +106,8 @@ function review_show(title) {
                                     <div class="content">
                                         <p>
                                             <strong>사용자${username}</strong> <small>날짜${time}</small> <small>평점</small>
-                                            <button onclick="delete_review('${username}', '${time}' ,'${title}' )" type="button" class="delete is-medium delete-button"></button>
-                                            <button onclick="like_review('${username}', '${time}' ,'${title}' )" type="button" class="delete is-medium delete-button"></button>
+                                            <button onclick="delete_review('${username}', '${time}' ,'${title}', '${review_comment}' )" type="button" class="delete is-medium delete-button"></button>
+                                            <button onclick="like_review('${username}', '${time}' ,'${title}', '${review_comment}' )" type="button" class="delete is-medium delete-button"></button>
        
                                             <br>
                                             ${review_comment}
@@ -124,13 +124,13 @@ function review_show(title) {
 }
 
 // 리뷰 삭제
-function delete_review(username, time, title) {
-    console.log('삭제',username, time, title)
+function delete_review(username, time, title, comment) {
+    console.log('삭제',username, time, title, comment)
 
     $.ajax({
         type: "POST",
         url: "/reviews/delete",
-        data: {username_give: username, title_give: title, time_give: time}, //여기부분은 post할떄 사용
+        data: {username_give: username, title_give: title, time_give: time, comment_give: comment}, //여기부분은 post할떄 사용
         success: function (response) {
             console.log(response)
             alert(response['msg'])
@@ -138,14 +138,14 @@ function delete_review(username, time, title) {
         }
     })
 }
-
-function like_review(username, time, title){
-    console.log('좋아요',username, time, title)
+// 리뷰 좋아요
+function like_review(username, time, title, comment){
+    console.log('좋아요',username, time, title, comment)
 
     $.ajax({
         type: "POST",
         url: "/reviews/like",
-        data: {username_give: username, title_give: title, time_give: time}, //여기부분은 post할떄 사용
+        data: {username_give: username, title_give: title, time_give: time, comment_give: comment}, //여기부분은 post할떄 사용
         success: function (response) {
             console.log(response)
             alert(response['msg'])
@@ -153,3 +153,9 @@ function like_review(username, time, title){
         }
     })
 }
+
+function logout(){
+        $.removeCookie('mytoken');
+        alert('로그아웃!')
+        window.location.href='/login'
+      }
