@@ -148,6 +148,7 @@ function like_review(username, time, title){
         data: {username_give: username, title_give: title, time_give: time}, //여기부분은 post할떄 사용
         success: function (response) {
             console.log(response)
+            alert(response['msg'])
             window.location.reload();
         }
     })
