@@ -89,28 +89,27 @@
 </div>
 <div id="post-review">
         <span>리뷰 작성</span>
-        <button class="button is-info review-btn">Info</button>
+        <button onclick="review_save()" class="button is-info review-btn">Info</button>
         <textarea class="textarea is-info" placeholder="Info textarea"></textarea>
 </div>
-<article class="media review-board posted-review">
-    <figure class="media-left">
-        <p class="image is-64x64">
-            <img src="{{ img_url }}">
-        </p>
-    </figure>
-    <div class="media-content">
-        <div class="content">
-            <p>
-                <strong>제목{{ title }}</strong> <small>날짜{{ date }}</small> <small>평점{{ point }}</small>
-                <button type="button" class="delete is-medium delete-button"></button>
-                <br>
-                리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
-                <br>
-                <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-            </p>
-        </div>
-
-    </div>
+<article id="article_wrap" class="media review-board posted-review">
+<!--    <figure class="media-left">-->
+<!--        <p class="image is-64x64">-->
+<!--            <img src="{{ img_url }}">-->
+<!--        </p>-->
+<!--    </figure>-->
+<!--    <div class="media-content">-->
+<!--        <div class="content">-->
+<!--            <p>-->
+<!--                <strong>사용자{{ title }}</strong> <small>날짜{{ date }}</small> <small>평점{{ point }}</small>-->
+<!--                <button type="button" class="delete is-medium delete-button"></button>-->
+<!--                <br>-->
+<!--                리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰-->
+<!--                <br>-->
+<!--                <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>-->
+<!--            </p>-->
+<!--        </div>-->
+<!--    </div>-->
 </article>
 
 

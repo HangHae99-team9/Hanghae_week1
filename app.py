@@ -24,6 +24,7 @@ import hashlib
 
 import requests
 
+
 # 메소드 부분
 def nowTime():
     now_time = datetime.datetime.now()
@@ -51,6 +52,7 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
@@ -62,17 +64,82 @@ def main_movie_get():
     movie_list = list(db.movies.find({}, {'_id': False}))
     return jsonify({'result': movie_list})
 
+
 # reviews 페이지
 @app.route('/reviews')
 def review_page():
     return render_template("reviews.html")
 
-@app.route('/reviews/detail', methods=['GET'])
-def review_get_detail():
-   title_receive = request.args.get('title_give')
-   movie = db.movies.find_one({'title': title_receive}, {'_id':False})
 
-   return jsonify({'result': movie})
+#  리뷰페이지에 맨위 포스터 보여주는 기능
+@app.route('/reviews/poster', methods=['GET'])
+def review_get_poster():  # 이걸 poster로 수정할가 생각중
+    title_receive = request.args.get('title_give')
+    movie = db.movies.find_one({'title': title_receive}, {'_id': False})
+
+    return jsonify({'result': movie})
+
+
+#  리뷰저장하기
+@app.route('/reviews/save', methods=['POST'])
+def review_save():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+
+        username = payload['id']
+        review_comment_receive = request.form['review_comment_give']
+        title_receive = request.form['movie_title_give']
+        # point_receive = request.form['point_give']
+        time = nowTime()
+        # like = 0  이코드는 db에 insert 코드에 넣어주면된다
+        print(username, time, review_comment_receive, title_receive)
+
+        doc = {'username': username, 'title': title_receive, 'review_comment': review_comment_receive, 'like': 0,
+               'time': time}
+        db.reviews.insert_one(doc)
+        return jsonify({'msg': '성공적으로 저장이완료되었습니다!!!'})
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+
+
+# 모든 리뷰 다보여주기
+@app.route('/reviews/show', methods=['GET'])
+def review_get_show():
+    title_receive = request.args.get('movie_title_give')
+    review_list = list(db.reviews.find({'title': title_receive}, {'_id': False}))
+    print('리뷰다 보여주기 ',review_list)
+    return jsonify({'result': review_list})
+
+# 리뷰 삭제하기
+@app.route('/reviews/delete', methods=['POST'])
+def review_delete():
+    title_receive = request.form['title_give']
+    username_receive = request.form['username_give']
+    time_receive = request.form['time_give']
+    print('삭제요청:', title_receive, username_receive, time_receive)
+    db.reviews.delete_one({'title': title_receive, 'username': username_receive, 'time': time_receive})
+
+    return jsonify({'msg': '삭제 완료되었습니다.'})
+
+# 리뷰 좋아요
+@app.route('/reviews/like', methods=['POST'])
+def review_like():
+    title_receive = request.form['title_give']
+    username_receive = request.form['username_give']
+    time_receive = request.form['time_give']
+
+    print('좋아요 코드: ', title_receive, username_receive, time_receive)
+    target_review = db.reviews.find_one({'title': title_receive, 'time':time_receive, 'username': username_receive})
+    current_like = target_review['like']
+
+    new_like = current_like + 1
+
+    db.reviews.update_one({'title': title_receive, 'username': username_receive, 'time': time_receive}, {'$set': {'like': new_like}})
+    return jsonify({'msg': '좋아요 완료!'})
 
 
 
@@ -84,6 +151,7 @@ def review_get_detail():
 # 회원가입및 로그인 API  경계선
 
 # 회원가입에서 아이디 중복확인 서버
+
 @app.route('/sign_up/check_dup', methods=['POST'])
 def check_dup():
     username_receive = request.form['username_give']
@@ -97,15 +165,16 @@ def sign_up():
     password_receive = request.form['password_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
-        "username": username_receive,                               # 아이디
-        "password": password_hash,                                  # 비밀번호
-        "profile_name": username_receive,                           # 프로필 이름 기본값은 아이디
-        "profile_pic": "",                                          # 프로필 사진 파일 이름
-        "profile_pic_real": "profile_pics/profile_placeholder.png", # 프로필 사진 기본 이미지
-        "profile_info": ""                                          # 프로필 한 마디
+        "username": username_receive,  # 아이디
+        "password": password_hash,  # 비밀번호
+        "profile_name": username_receive,  # 프로필 이름 기본값은 아이디
+        "profile_pic": "",  # 프로필 사진 파일 이름
+        "profile_pic_real": "profile_pics/profile_placeholder.png",  # 프로필 사진 기본 이미지
+        "profile_info": ""  # 프로필 한 마디
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
+
 
 # 로그인
 @app.route('/sign_in', methods=['POST'])
@@ -119,8 +188,8 @@ def sign_in():
 
     if result is not None:
         payload = {
-         'id': username_receive,
-         'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 2)  # 로그인 24시간 유지 60 * 60 * 24
+            'id': username_receive,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 5)  # 로그인 24시간 유지 60 * 60 * 24
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
 
@@ -128,36 +197,6 @@ def sign_in():
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
-# @app.route('/post', methods=['POST'])
-# def posting():
-#     token_receive = request.cookies.get('mytoken')
-#
-#     try:
-#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-#
-#         user_info = db.users.find_one({"username": payload["id"]})
-#         review_receive = `request`.form['review_give']
-#         store = request.form["store"]
-#         now = datetime.now()
-#         time = now.strftime('%Y년 %m월 %d일 %H시 %M분')
-#         if len(review_receive) < 5:
-#             return jsonify({"msg" : "리뷰를 5자이상 달아주세요"})
-#         doc = {
-#             'review': review_receive,
-#             'store': store,
-#             'user': user_info,
-#             'time': time
-#         }
-#         db.reviews.insert_one(doc)
-#         return jsonify({'msg': '리뷰를 저장했습니다.'})
-#
-#     except jwt.ExpiredSignatureError:
-#         return jsonify({'msg': '로그인 시간이 만료됐습니다.'})
-#     except jwt.exceptions.DecodeError:
-#         return jsonify({'msg': "로그인 해주세요"})
-#
-
 
 
 if __name__ == '__main__':
