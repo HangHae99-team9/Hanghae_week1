@@ -120,9 +120,36 @@ def sign_in():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
+# @app.route('/post', methods=['POST'])
+# def posting():
+#     token_receive = request.cookies.get('mytoken')
+#
+#     try:
+#         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+#
+#         user_info = db.users.find_one({"username": payload["id"]})
+#         review_receive = `request`.form['review_give']
+#         store = request.form["store"]
+#         now = datetime.now()
+#         time = now.strftime('%Y년 %m월 %d일 %H시 %M분')
+#         if len(review_receive) < 5:
+#             return jsonify({"msg" : "리뷰를 5자이상 달아주세요"})
+#         doc = {
+#             'review': review_receive,
+#             'store': store,
+#             'user': user_info,
+#             'time': time
+#         }
+#         db.reviews.insert_one(doc)
+#         return jsonify({'msg': '리뷰를 저장했습니다.'})
+#
+#     except jwt.ExpiredSignatureError:
+#         return jsonify({'msg': '로그인 시간이 만료됐습니다.'})
+#     except jwt.exceptions.DecodeError:
+#         return jsonify({'msg': "로그인 해주세요"})
+#
 
 
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
-

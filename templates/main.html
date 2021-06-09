@@ -11,13 +11,94 @@
     <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
           integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" rel="stylesheet">
 
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/indexStyle.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/indexStyle.css') }}">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/static/js/mainJS.js"></script>
 
 </head>
 <body>
+
+  <!--          navbar-->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item Logo" href="/">
+            HangHae Office
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="navbar-end">
+        <div class="navbar-item">
+            <div class="buttons">
+
+                <a class="button login-button" onclick="window.location.href='/login'">
+
+                        <strong>Sign up/Sign in</strong>
+                    </a>
+            </div>
+        </div>
+    </div>
+
+</nav>
+  <!--          main center-->
+  <section class="main-home">
+    <div class="main-home-left">
+      <img
+        alt="Responsive image"
+        class="img-fluid main-img"
+        src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80">
+    </div>
+    <div class="main-home-right1">
+      <h3>박스 오피스</h3>
+      <ul class="list-group list-group-flush" id="movie-list1">
+        {% for weekly in weeklys %}
+        {% set movie_rank = weekly['rank'] %}
+        {% set movie_name = weekly['movieNm'] %}
+        {% if movie_rank|int <= 5 %}
+        <li class="list-group-item">{{movie_rank}}.{{ weekly['movieNm'] }}</li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="main-home-right1">
+      <h3 class="r2-h3">박스 오피스</h3>
+      <ul class="list-group list-group-flush" id="movie-list2">
+        {% for weekly in weeklys %}
+        {% set movie_rank = weekly['rank'] %}
+        {% set movie_name = weekly['movieNm'] %}
+        {% if movie_rank|int > 5 %}
+        <li class="list-group-item">{{movie_rank}}.{{ weekly['movieNm'] }}</li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+  <!--          cards-->
+  <div class="card-columns">
+    <div class="card" onclick = "window.location.href = '/reviews'">
+      <div class="card-image">
+        <figure class="image is-3by4">
+          <img alt="Placeholder image" src="https://bulma.io/images/placeholders/1280x960.png">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content">
+            <p class="title is-4">movie name</p>
+          </div>
+
 <div class="wrap">
     <!--          navbar-->
     <nav class="navbar is-transparent is-fixed-top">
@@ -51,6 +132,7 @@
                     alt="Responsive image"
                     class="img-fluid main-img"
                     src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80">
+
         </div>
         <div class="main-home-right1">
             <h3>박스 오피스</h3>
