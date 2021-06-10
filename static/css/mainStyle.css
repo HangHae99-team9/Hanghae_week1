@@ -107,6 +107,14 @@ body {
 
 .delete-button {
     float: right;
+    width: 3%;
+    background-color: transparent;
+    border-color: transparent;
+}
+.like-button{
+    width: 3%;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .review-point {
