@@ -60,7 +60,9 @@
             {% set movie_rank = weekly['rank'] %}
             {% set movie_name = weekly['movieNm'] %}
             {% if movie_rank|int <= 5 %}
-            <li class="list-group-item">{{movie_rank}} {{ weekly['movieNm'] }}</li>
+            <li class="list-group-item">
+              <p>{{movie_rank}} {{ weekly['movieNm'] }}</p>
+            </li>
             {% endif %}
             {% endfor %}
           </ul>
@@ -71,7 +73,9 @@
             {% set movie_rank = weekly['rank'] %}
             {% set movie_name = weekly['movieNm'] %}
             {% if movie_rank|int > 5 %}
-            <li class="list-group-item">{{movie_rank}} {{ weekly['movieNm'] }}</li>
+            <li class="list-group-item">
+              <p>{{movie_rank}} {{ weekly['movieNm'] }}</p>
+            </li>
             {% endif %}
             {% endfor %}
           </ul>
