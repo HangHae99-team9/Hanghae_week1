@@ -5,8 +5,8 @@ app = Flask(__name__)
 from pymongo import MongoClient
 # client = MongoClient('mongodb://test:test@3.35.4.232', 27017)
 # ,username="test", password="test" 이코드 일단안넣음
-client = MongoClient('mongodb://test:test@localhost', 27017)
-# client = MongoClient('localhost', 27017)
+# client = MongoClient('mongodb://test:test@localhost', 27017)
+client = MongoClient('localhost', 27017)
 db = client.team9TestOne
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
@@ -152,7 +152,7 @@ def review_like():
 
     new_like = current_like + 1
 
-    db.reviews.update_one({'title': title_receive, 'username': username_receive, 'time': time_receive}, {'$set': {'like': new_like}})
+    db.reviews.update_one({'title': title_receive, 'username': username_receive, 'time': time_receive, 'review_comment': comment_receive}, {'$set': {'like': new_like}})
     return jsonify({'msg': '좋아요 완료!'})
 
 
