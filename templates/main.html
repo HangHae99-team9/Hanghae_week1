@@ -15,8 +15,6 @@
           integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/indexStyle.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainStyle.css') }}">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -25,134 +23,64 @@
 
 </head>
 <body>
-
-<!--          navbar-->
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-            <img src="https://image.flaticon.com/icons/png/512/3564/3564737.png">
-            <span class="Logo">HangHae Office</span>
-        </a>
-
-    </div>
-    <div class="navbar-end">
-        <div class="navbar-item">
-            <div class="buttons">
-
-                <a class="button login-button" onclick="window.location.href='/login'">
-                    {% if username == id %}
-                    <span class="Login">Logout</span>
-                    {% else %}
-                    <span class="Login">Sign in/Sign out</span>
-                    {% endif %}
-                </a>
-            </div>
-        </div>
-    </div>
-    </div>
-</nav>
-<!--          main center-->
-<section class="main-home">
-    <div class="main-home-left">
-        <img
-                alt="Responsive image"
-                class="img-fluid main-img"
-                src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80">
-    </div>
-    <div class="main-home-right1">
-        <h3>박스 오피스</h3>
-        <ul class="list-group list-group-flush" id="movie-list1">
+  <!--          navbar-->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+      <!--          navbar logo 넣어야함-->
+      <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+              <img src="https://image.flaticon.com/icons/png/512/1179/1179120.png">
+              <span class="Logo">HangHae Office</span>
+          </a>
+      </div>
+      <div class="navbar-end">
+          <div class="navbar-item">
+              <div class="buttons">
+                  <a class="button login-button" onclick="logout()">
+                      Logout
+                  </a>
+              </div>
+          </div>
+      </div>
+  </nav>
+  <!--          main center-->
+  <section class="jb-wrap">
+      <div class="jb-image">
+      <img
+        alt="Responsive image"
+        class="img-fluid main-img"
+        src="https://cdn.vox-cdn.com/thumbor/TNR9_SeqpcAKiqrdZlxqupZ8aJM=/0x0:990x652/1200x800/filters:focal(416x247:574x405)/cdn.vox-cdn.com/uploads/chorus_image/image/67170965/Screen_Shot_2015-05-08_at_12.32.14_PM.0.0.png">
+      </div>
+      <div class="office-text">
+        <h2>박 스 오 피 스</h2>
+      </div>
+      <div class="jb-text">
+        <div class="main-home-right1">
+          <ul class="list-group list-group-flush">
             {% for weekly in weeklys %}
             {% set movie_rank = weekly['rank'] %}
             {% set movie_name = weekly['movieNm'] %}
             {% if movie_rank|int <= 5 %}
-            <li class="list-group-item">{{movie_rank}}.{{ weekly['movieNm'] }}</li>
+            <li class="list-group-item">{{movie_rank}} {{ weekly['movieNm'] }}</li>
             {% endif %}
             {% endfor %}
-        </ul>
-    </div>
-    <div class="main-home-right1">
-        <h3 class="r2-h3">박스 오피스</h3>
-        <ul class="list-group list-group-flush" id="movie-list2">
+          </ul>
+        </div>
+        <div class="main-home-right2">
+          <ul class="list-group list-group-flush">
             {% for weekly in weeklys %}
             {% set movie_rank = weekly['rank'] %}
             {% set movie_name = weekly['movieNm'] %}
             {% if movie_rank|int > 5 %}
-            <li class="list-group-item">{{movie_rank}}.{{ weekly['movieNm'] }}</li>
+            <li class="list-group-item">{{movie_rank}} {{ weekly['movieNm'] }}</li>
             {% endif %}
             {% endfor %}
-        </ul>
-    </div>
-</section>
-<!--          cards-->
-<div class="card-columns">
-    <div class="card" onclick="window.location.href = '/reviews'">
-        <div class="card-image">
-            <figure class="image is-3by4">
-                <img alt="Placeholder image" src="https://bulma.io/images/placeholders/1280x960.png">
-            </figure>
+          </ul>
         </div>
-        <div class="card-content">
-            <div class="media">
-                <div class="media-content">
-                    <p class="title is-4">movie name</p>
-                </div>
+			</div>
+  </section>
+  <!--          cards-->
+  <div class="card-columns">
 
-                <div class="wrap">
-                    <section class="main-home">
-                        <div class="main-home-left">
-                            <img
-                                    alt="Responsive image"
-                                    class="img-fluid main-img"
-                                    src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80">
-
-                        </div>
-                        <div class="main-home-right1">
-                            <h3>박스 오피스</h3>
-                            <ul class="list-group list-group-flush" id="movie-list1">
-                                {% for weekly in weeklys %}
-                                {% set movie_rank = weekly['rank'] %}
-                                {% set movie_name = weekly['movieNm'] %}
-                                {% if movie_rank|int <= 5 %}
-                                <li class="list-group-item">{{movie_rank}}.{{ weekly['movieNm'] }}</li>
-                                {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="main-home-right1">
-                            <h3 class="r2-h3">박스 오피스</h3>
-                            <ul class="list-group list-group-flush" id="movie-list2">
-                                {% for weekly in weeklys %}
-                                {% set movie_rank = weekly['rank'] %}
-                                {% set movie_name = weekly['movieNm'] %}
-                                {% if movie_rank|int > 5 %}
-                                <li class="list-group-item">{{movie_rank}}.{{ weekly['movieNm'] }}</li>
-                                {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </section>
-                    <!--          cards-->
-                    <div class="card-columns">
-                        <!--        <div class="card" onclick="window.location.href = '/reviews'">-->
-                        <!--            <div class="card-image">-->
-                        <!--                <figure class="image is-3by4">-->
-                        <!--                    <img alt="Placeholder image" src="https://bulma.io/images/placeholders/1280x960.png">-->
-                        <!--                </figure>-->
-                        <!--            </div>-->
-                        <!--            <div class="card-content">-->
-                        <!--                <div class="media">-->
-                        <!--                    <div class="media-content">-->
-                        <!--                        <p class="title is-4">movie name</p>-->
-                        <!--                    </div>-->
-                        <!--                </div>-->
-                        <!--                <div class="content">-->
-                        <!--                    point-->
-                        <!--                </div>-->
-                        <!--            </div>-->
-                        <!--        </div>-->
-                    </div>
-                </div>
-            </div>
+  </div>
 </body>
 </html>

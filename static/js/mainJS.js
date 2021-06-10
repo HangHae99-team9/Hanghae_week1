@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    $('.card-columns').empty();
     showMovies();
 });
 
@@ -13,8 +13,30 @@ function showMovies() {
             let movies = response['result']
             for (let i = 0; i < movies.length; i++) {
                 let image_url = movies[i]['img_url']
+
+                let age = movies[i]['age'].substring(0,2)
+                let age_html = ``;
+                if (age == '청소') {
+                  age = '청불'
+                  age_html = `<div class="bg-text age18">
+                                  <p>${age}</p>
+                              </div>`
+                } else if (age == '15') {
+                  age_html = `<div class="bg-text age15">
+                                  <p>${age}</p>
+                              </div>`
+                } else if (age == '12') {
+                  age_html = `<div class="bg-text age12">
+                                  <p>${age}</p>
+                              </div>`
+                } else {
+                  age_html = `<div class="bg-text ageAll">
+                                  <p>${age}</p>
+                              </div>`
+                };
                 let title = movies[i]['title']
                 let point = movies[i]['point']
+                let release = movies[i]['release'].split('.')
 
                 let temp_html = `<div class="card" onclick="window.location.href = '/reviews?title=${title}'">
                                     <div class="card-image">
@@ -22,6 +44,7 @@ function showMovies() {
                                             <img alt="Placeholder image" src="${image_url}">
                                         </figure>
                                     </div>
+                                    ${age_html}
                                     <div class="card-content">
                                         <div class="media">
                                             <div class="media-content">
@@ -29,7 +52,8 @@ function showMovies() {
                                             </div>
                                         </div>
                                         <div class="content">
-                                            ${point}
+                                            <div>평점 : ${point}</div>
+                                            <div>${release[1]}.${release[2]} 개봉</div>
                                         </div>
                                     </div>
                                 </div>`
@@ -44,4 +68,4 @@ function logout(){
         $.removeCookie('mytoken');
         alert('로그아웃!')
         window.location.href='/login'
-      }
+}
