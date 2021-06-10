@@ -50,7 +50,6 @@ body {
     width: 80%;
     margin-left: 10%;
     margin-top: 10px;
-    padding-top: 3%;
     /*border-style: solid;*/
     /*border-width: 2px;*/
     border-radius: 8px;
@@ -107,6 +106,14 @@ body {
 
 .delete-button {
     float: right;
+    width: 3%;
+    background-color: transparent;
+    border-color: transparent;
+}
+.like-button{
+    width: 3%;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .review-point {
@@ -134,5 +141,4 @@ body {
 .review-content{
     margin-top: 10px;
 }
-
 

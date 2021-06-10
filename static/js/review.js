@@ -64,12 +64,13 @@ function showMovie(title) {
 // 리뷰 저장하기
 function review_save() {
     let review_comment = $('.textarea').val();
+    let review_point = rating.rate
     let movie_title = $('.poster-title').text();
 
     $.ajax({
         type: "POST",
         url: "/reviews/save",
-        data: {review_comment_give: review_comment, movie_title_give: movie_title}, //여기부분은 post할떄 사용
+        data: {review_comment_give: review_comment, movie_title_give: movie_title, review_point_give: review_point}, //여기부분은 post할떄 사용
         success: function (response) {
             console.log(response);
             window.location.reload();
@@ -84,7 +85,7 @@ function review_show(title) {
     $.ajax({
         type: "GET",
         url: "/reviews/show",
-        data: {movie_title_give: movie_title},
+        data: {movie_title_give: movie_title}, //여기부분은 post할떄 사용
         success: function (response) {
             let reviews = response['result'];
 
@@ -95,29 +96,34 @@ function review_show(title) {
                 let like = reviews[i]['like']
                 let time = reviews[i]['time']
                 let review_comment = reviews[i]['review_comment']
+                let review_point = reviews[i]['review_point']
 
 
-                let temp_html = `<figure class="media-left">
-                                    <p class="image is-64x64">
-                                        <img src="">
-                                    </p>
-                                </figure>
-                                <div class="media-content">
-                                    <div class="content">
-                                        <p>
-                                            <strong>사용자${username}</strong> <small>날짜${time}</small> <small>평점</small>
-                                            <button onclick="delete_review('${username}', '${time}' ,'${title}', '${review_comment}' )" type="button" class="delete is-medium delete-button"></button>
-                                            <button onclick="like_review('${username}', '${time}' ,'${title}', '${review_comment}' )" type="button" class="delete is-medium delete-button"></button>
-       
-                                            <br>
-                                            ${review_comment}
-                                            <br>
-                                            <small><a>Like ${like}</a> · <a>Reply</a> · 3 hrs</small>
-                                        </p>
+                let temp_html =`<article class="media review-board posted-review">
+                                    <figure class="media-left">
+                                        <img class="posted-review-img" src="https://image.flaticon.com/icons/png/512/1179/1179069.png">
+                                            </figure>
+                                                <div class="media-content">
+                                                <div class="content">
+                                            <p>
+                                                <strong>사용자 : ${username}</strong><small> | </small> <small>${time}</small><small> | </small> <small>평점 :${review_point}점</small>
+                                                
+                                                <button onclick="delete_review('${username}', '${time}' ,'${title}', '${review_comment}')" type="button" class="delete-button">
+                                                    <img src="https://image.flaticon.com/icons/png/512/2087/2087825.png">
+                                                </button>
+           
+                                                <br>
+                                                ${review_comment}
+                                                <br>
+                                                <button onclick="like_review('${username}', '${time}' ,'${title}', '${review_comment}')" type="button" class="like-button">
+                                                    <img src="https://about.fb.com/ko/wp-content/uploads/sites/16/2014/07/likebutton.png?w=1200">
+                                                </button><a>Like ${like}</a>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>`
+                                </article>`
 
-                $('#article_wrap').append(temp_html)
+                $('#posted-review-wrap').append(temp_html)
             }
         }
     })
@@ -153,6 +159,32 @@ function like_review(username, time, title, comment){
         }
     })
 }
+function Rating() {
+};
+Rating.prototype.rate = 0;
+Rating.prototype.setRate = function (newrate) {
+
+    this.rate = newrate;
+    let items = document.querySelectorAll('.rate_radio')
+    items.forEach(function (item, idx) {
+        if (idx < newrate) {
+            item.checked = true;
+        } else {
+            item.checked = false;
+        }
+    });
+}
+let rating = new Rating();
+
+document.addEventListener('DOMContentLoaded', function () {
+    //별점선택 이벤트 리스너
+    document.querySelector('.rating').addEventListener('click', function (e) {
+        let elem = e.target;
+        if (elem.classList.contains('rate_radio')) {
+            rating.setRate(parseInt(elem.value));
+        }
+    })
+});
 
 function logout(){
         $.removeCookie('mytoken');

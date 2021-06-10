@@ -91,12 +91,14 @@ def review_save():
         username = payload['id']
         review_comment_receive = request.form['review_comment_give']
         title_receive = request.form['movie_title_give']
+        review_point_receive = request.form['review_point_give']
         # point_receive = request.form['point_give']
         time = nowTime()
         # like = 0  이코드는 db에 insert 코드에 넣어주면된다
-        print(username, time, review_comment_receive, title_receive)
+        print(username, time, review_comment_receive, title_receive, review_point_receive)
 
-        doc = {'username': username, 'title': title_receive, 'review_comment': review_comment_receive, 'like': 0,
+        doc = {'username': username, 'title': title_receive, 'review_comment': review_comment_receive,
+               'review_point': review_point_receive, 'like': 0,
                'time': time}
         db.reviews.insert_one(doc)
         return jsonify({'msg': '성공적으로 저장이완료되었습니다!!!'})
@@ -129,7 +131,8 @@ def review_delete():
         if(username_decode != username_receive):
             return jsonify({'msg': '이 글에대해 삭제 권한이 없습니다.'})
         print('삭제요청:', title_receive, username_receive, time_receive, '디코드:', username_decode)
-        db.reviews.delete_one({'title': title_receive, 'username': username_receive, 'time': time_receive, 'review_comment': comment_receive})
+        db.reviews.delete_one({'title': title_receive, 'username': username_receive, 'time': time_receive,
+                               'review_comment': comment_receive})
 
         return jsonify({'msg': '삭제 완료되었습니다.'})
 
@@ -147,7 +150,8 @@ def review_like():
     time_receive = request.form['time_give']
     comment_receive = request.form['comment_give']
     print('좋아요 코드: ', title_receive, username_receive, time_receive)
-    target_review = db.reviews.find_one({'title': title_receive, 'time':time_receive, 'username': username_receive, 'review_comment': comment_receive })
+    target_review = db.reviews.find_one({'title': title_receive, 'time':time_receive, 'username': username_receive,
+                                         'review_comment': comment_receive })
     current_like = target_review['like']
 
     new_like = current_like + 1
