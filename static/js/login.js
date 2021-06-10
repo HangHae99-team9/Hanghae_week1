@@ -11,16 +11,16 @@ function kakaoshare() {
     objectType: "feed",
     content: {
       title: "Hanghae_Office",
-      description: "설명",
+      description: "재밌는 영화 후기 및 리뷰를 보실수 있습니다",
       imageUrl:
-        "http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+        "https://imgur.com/a/1sQWwg3",
       link: {
         webUrl: "http://hanghae-office.shop",
       },
     },
     buttons: [
       {
-        title: "웹으로 이동",
+        title: "구경하러 가기",
         link: {
           webUrl: "http://hanghae-office.shop",
         },
