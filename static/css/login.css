@@ -9,9 +9,34 @@
     border-bottom-style: solid;
     height: 92px;
 }
+.navbar_login {
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    background-color: #0F5298;
+    border-bottom-width: 1px;
+    border-bottom-color: #0F5298;
+    border-bottom-style: solid;
+    height: 25%;
+    margin: 0 auto;
+}
 .Logo{
     margin-left: 20px;
     font-size: 30px;
+    color: black;
+}
+.navbar_login_logo_wrap{
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+.navbar_login_logo{
+    width: 180px;
+}
+.Logo_login{
+    font-size: 100px;
+    text-align: center;
     color: black;
 }
 .login-button{
