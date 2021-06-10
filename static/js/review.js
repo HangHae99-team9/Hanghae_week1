@@ -23,38 +23,38 @@ function showMovie(title) {
             let release = response['result']['release']
             let director = response['result']['director']
             let actor = response['result']['actor_list'][0]
+            // 추가된코드 06-10 13시06분
             let url = response['result']['url']
-            let summary = response['result']['summary'] //줄거리 추가
 
             let temp_html = `<div class="image_wrap">
-                                <img class="reviews_movie_image"
-                                        src="${img_url}"
-                                        alt="영화이미지">
-                            </div>
-                            <div class="movie-information-wrap">
-                                <dt class="tit">
-                                    <a class="poster-title" href="${url}">${title}</a>
-                                    <span class="ico_rating_12">${age}</span>
-                                </dt>
-                                <div>
-                                    <div class="info_txt1">
-                                        <span><strong>줄거리</strong> : ${summary}</span>
-                                        <div>
-                                                    <span class="link_txt">
-                                                            <span>${genre}</span>
-                                                    </span>
-                                            <span class="split">|</span>
-                                            ${time}
-                                            <span class="split">|</span>
-                                            ${release}
-                                        </div>
-                                        <dt class="movie_director">감독 <span>| ${director}</span></dt>
-                        
-                                        <dt class="move_actor">출연 <span>| ${actor} </span></dt>
-                        
-                                    </div>
-                                </div>
-                            </div>`
+        <img class="reviews_movie_image"
+                src="${img_url}"
+                alt="영화이미지">
+    </div>
+    <div class="movie-information-wrap">
+        <dt class="tit">
+            <span class="ico_rating_12">${age}</span>
+            <a class="poster-title" href="${url}">${title}</a>
+        </dt>
+        <div>
+            <div class="info_txt1">
+                <div class="tit_t1">개요</div>
+                <div>
+							<span class="link_txt">
+									<span>${genre}</span>
+							</span>
+                    <span class="split">|</span>
+                    ${time}
+                    <span class="split">|</span>
+                    ${release}
+                </div>
+                <dt class="movie_director">감독 <span>| ${director}</span></dt>
+
+                <dt class="move_actor">출연 <span>| ${actor} </span></dt>
+
+            </div>
+        </div>
+    </div>`
 
             $('#movie-information').append(temp_html);
 
@@ -78,7 +78,6 @@ function review_save() {
         }
     })
 }
-
 // 모든 리뷰 다 가져오기
 function review_show(title) {
 
@@ -101,7 +100,7 @@ function review_show(title) {
                 let review_point = reviews[i]['review_point']
 
 
-                let temp_html = `<article class="media review-board posted-review">
+                let temp_html =`<article class="media review-board posted-review">
                                     <figure class="media-left">
                                         <img class="posted-review-img" src="https://image.flaticon.com/icons/png/512/1179/1179069.png">
                                             </figure>
@@ -133,7 +132,7 @@ function review_show(title) {
 
 // 리뷰 삭제
 function delete_review(username, time, title, comment) {
-    console.log('삭제', username, time, title, comment)
+    console.log('삭제',username, time, title, comment)
 
     $.ajax({
         type: "POST",
@@ -146,10 +145,9 @@ function delete_review(username, time, title, comment) {
         }
     })
 }
-
 // 리뷰 좋아요
-function like_review(username, time, title, comment) {
-    console.log('좋아요', username, time, title, comment)
+function like_review(username, time, title, comment){
+    console.log('좋아요',username, time, title, comment)
 
     $.ajax({
         type: "POST",
@@ -162,7 +160,6 @@ function like_review(username, time, title, comment) {
         }
     })
 }
-
 function Rating() {
 };
 Rating.prototype.rate = 0;
@@ -190,8 +187,8 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 });
 
-function logout() {
-    $.removeCookie('mytoken');
-    alert('로그아웃!')
-    window.location.href = '/login'
-}
+function logout(){
+        $.removeCookie('mytoken');
+        alert('로그아웃!')
+        window.location.href='/login'
+      }

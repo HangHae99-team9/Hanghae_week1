@@ -45,6 +45,18 @@
     color: white;
     float: right;
 }
+.share-btn{
+    background-color: white;
+    border-radius: 3px;
+    border: transparent;
+    width: 120px;
+    height: 40px;
+    float: right;
+    font-size: 15px;
+    font-weight: bold;
+    color: #0F5298;
+    border-radius: 4px;
+}
 .Login{
     color: black;
 }

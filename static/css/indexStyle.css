@@ -71,6 +71,20 @@
   margin: 5px 10px;
 }
 
+li.list-group-item p {
+  animation: mover 3s 3 alternate;
+}
+
+@keyframes mover {
+  from {
+    margin-left: 200px;
+  }
+
+  to {
+    margin-left: 0px;
+  }
+}
+
 .img-fluid .main-img {
   max-width: 100%;
 }
@@ -104,6 +118,11 @@
   box-shadow: 14px 13px 8px -4px rgba(11, 5, 5, 0.62);
   -webkit-box-shadow: 14px 13px 8px -4px rgba(11, 5, 5, 0.62);
   -moz-box-shadow: 14px 13px 8px -4px rgba(11, 5, 5, 0.62);
+}
+
+.card:hover {
+  transform: scale(1.02);
+  transition: all 200ms ease-in-out;
 }
 
 .bg-text {

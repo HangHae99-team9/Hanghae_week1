@@ -11,25 +11,29 @@ body {
 #movie-information {
     width: 80%;
     margin-left: 10%;
-    height: 50%;
+    height: 350px;
     box-sizing: border-box;
     /*border-width: 2px;*/
     /*border-style: solid;*/
     /*border-color: #666666;*/
     background-color: white;
     border-color: transparent;
+    position: relative;
     box-shadow: 3px 3px 3px 3px #0F5298;
     border-radius: 8px;
 }
 
 .image_wrap {
-    display: inline-block;
+    /*display: inline-block;*/
+    height: 300px;
+    position: absolute;
 }
 
 .movie-information-wrap {
-    display: inline-block;
     position: relative;
-    padding-left: 5%;
+    margin-top: 20px;
+    display: inline-block;
+    margin-left: 25%;
 }
 .movie_age{
     font-size: 15px;
@@ -40,10 +44,14 @@ body {
 }
 
 .reviews_movie_image {
+    position: relative;
     border-radius: 5px;
     height: 300px;
-    margin-left: 20%;
-    margin-bottom: 5px;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+.information-display{
+    display: inline-block;
 }
 
 #post-review {
