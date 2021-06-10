@@ -28,12 +28,14 @@ body {
     height: 300px;
     position: absolute;
 }
+.poster-title{
+    font-size: 20px;
+}
 
 .movie-information-wrap {
-    position: relative;
     margin-top: 20px;
     display: inline-block;
-    margin-left: 25%;
+    margin-left: 250px;
 }
 .movie_age{
     font-size: 15px;
@@ -52,6 +54,9 @@ body {
 }
 .information-display{
     display: inline-block;
+}
+.movie-genre{
+    font-weight: bold;
 }
 
 #post-review {
