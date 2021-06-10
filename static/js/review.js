@@ -23,7 +23,8 @@ function showMovie(title) {
             let release = response['result']['release']
             let director = response['result']['director']
             let actor = response['result']['actor_list'][0]
-
+            // 추가된코드 06-10 13시06분
+            let url = response['result']['url']
 
             let temp_html = `<div class="image_wrap">
         <img class="reviews_movie_image"
@@ -33,7 +34,7 @@ function showMovie(title) {
     <div class="movie-information-wrap">
         <dt class="tit">
             <span class="ico_rating_12">${age}</span>
-            <a class="poster-title" href="/movie/bi/mi/basic.nhn?code=187322">${title}</a>
+            <a class="poster-title" href="${url}">${title}</a>
         </dt>
         <div>
             <div class="info_txt1">
