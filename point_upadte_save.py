@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 from pymongo import MongoClient
 
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://test:test@52.78.44.138', 27017)
 db = client.team9TestOne
 
 # 네티즌 포인트로 업데이트할려고 만든코드

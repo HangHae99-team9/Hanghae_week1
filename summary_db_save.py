@@ -6,8 +6,7 @@ import requests
 
 from pymongo import MongoClient
 
-# client = MongoClient('mongodb://test:test@3.35.4.232', 27017)
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://test:test@52.78.44.138', 27017)
 db = client.team9TestOne
 
 
@@ -36,7 +35,7 @@ def insert_movie(url):
     # data = requests.get(url, headers=headers)
 
     driver.get(url)  # 드라이버에 해당 url의 웹페이지를 띄웁니다.
-    sleep(2)  # 페이지가 로딩되는 동안 5초 간 기다립니다.
+    sleep(5)  # 페이지가 로딩되는 동안 5초 간 기다립니다.
 
     req = driver.page_source  # html 정보를 가져옵니다.
     driver.quit()  # 정보를 가져왔으므로 드라이버는 꺼줍니다.
