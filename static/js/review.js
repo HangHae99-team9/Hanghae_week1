@@ -40,13 +40,11 @@ function showMovie(title) {
                                     <div class="info_txt1">
                                         <span><strong>줄거리</strong> : ${summary}</span>
                                         <div>
-                                                    <span class="link_txt">
-                                                            <span>${genre}</span>
-                                                    </span>
-                                            <span class="split">|</span>
-                                            ${time}
-                                            <span class="split">|</span>
-                                            ${release}
+                                            <span class="movie-genre">${genre}</span>
+                                            <span>|</span>
+                                            <span class="movie-genre">${time}</span>
+                                            <span> |</span>
+                                            <span class="movie-genre">${release}</span>
                                         </div>
                                         <dt class="movie_director">감독 <span>| ${director}</span></dt>
                         
