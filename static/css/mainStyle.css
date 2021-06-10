@@ -111,11 +111,13 @@ body {
     width: 3%;
     background-color: transparent;
     border-color: transparent;
+    cursor: pointer;
 }
 .like-button{
     width: 3%;
     background-color: transparent;
     border-color: transparent;
+    cursor: pointer;
 }
 
 .review-point {
