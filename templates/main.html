@@ -3,8 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-
-    <title>Team9 항해 오피스</title>
+    <meta property="og:title" content="항해 오피스" />
+    <meta property="og:description" content="재밌는 영화 후기 및 리뷰를 보실수 있습니다" />
+    <meta property="og:image" content="{{ url_for('static', filename='css/navbar_image.png') }}" />
+    <title>항해 오피스</title>
+    <link rel="icon" href="https://image.flaticon.com/icons/png/512/1179/1179120.png">
 
     <!-- Bulma CSS 링크 -->
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" rel="stylesheet">
@@ -13,7 +16,7 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/indexStyle.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/indexStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainStyle.css') }}">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -27,7 +30,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
-            <img src="https://image.flaticon.com/icons/png/512/1179/1179120.png">
+            <img src="https://image.flaticon.com/icons/png/512/3564/3564737.png">
             <span class="Logo">HangHae Office</span>
         </a>
 
@@ -96,32 +99,6 @@
                 </div>
 
                 <div class="wrap">
-                    <!--          navbar-->
-                    <nav class="navbar is-transparent is-fixed-top">
-                        <div class="navbar-brand">
-                            <a class="navbar-item" onclick="window.location.href = '/'">
-                                항해 오피스
-                            </a>
-                        </div>
-                        <div class="navbar-menu" id="navbarExampleTransparentExample">
-                            <div class="navbar-end">
-                                <div class="navbar-item">
-                                    <div class="field is-grouped">
-                                        <p class="control">
-                                            <a class="button is-primary"
-                                               onclick="window.location.href = '/login'">
-                        <span class="icon">
-                          <i class="fas fa-sign-in-alt"></i>
-                        </span>
-                                                <span>로그인</span>
-                                            </a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-                    <!--          main center-->
                     <section class="main-home">
                         <div class="main-home-left">
                             <img
@@ -176,5 +153,6 @@
                         <!--        </div>-->
                     </div>
                 </div>
+            </div>
 </body>
 </html>
